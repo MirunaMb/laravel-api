@@ -17,7 +17,7 @@ class ProjectController extends Controller
 {
     $projects = Project::select("id","type_id","title","slug")
         ->where('published', 1)
-        ->with('type:id,name,color')
+        ->with('technologies:id,name_technologies','type:id,name,color')
         ->paginate(10); 
 
     return response()->json($projects);
