@@ -20,6 +20,10 @@ class ProjectController extends Controller
         ->with('technologies:id,name_technologies','type:id,name,color')
         ->paginate(10); 
 
+        foreach ($projects as $project) {
+            $project->cover_image = $project->getAbsUriImage();
+        }
+     
     return response()->json($projects);
 }
     
@@ -34,7 +38,9 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::with('technologies:id,name_technologies','type:id,name,color')->where('id',$id)->first(); 
-        
+
+        $project->cover_image = $project->getAbsUriImage();
+
         return response()->json($project);
     }
 
