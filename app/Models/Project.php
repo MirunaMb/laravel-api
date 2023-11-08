@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class Project extends Model
 {
@@ -43,5 +45,11 @@ class Project extends Model
             return $html;
         }
     }
+
+    public function getAbsUriImage()
+{
+    return $this->cover_image ? Storage::url($this->cover_image) : "";
+}
+
    
 }
