@@ -50,14 +50,7 @@ class ProjectController extends Controller
     }
     
    public function projectByType($type_id){
-    //manca il nome della type 
-    //come facciamo a sostiture il nome_type con il type ?
-    //mi trovo il type
-    $type = Type::select('id','name','color')
-    ->where('id', $type_id)
-    ->first();
-    if(!$type)
-    abort(404,'Category not found');
+   
 
     //come lo recupero da dentro il metodo questo parametro ?passandogli come parametro type_id 
     //mi trovo i progetti
@@ -75,10 +68,6 @@ class ProjectController extends Controller
         $project->cover_image = $project->getAbsUriImage();
     }
  
-    return response()->json([
-        'type'=> $type,
-        'projects'=> $projects
-    ]);
-
+    return response()->json($projects);
    }
 }
