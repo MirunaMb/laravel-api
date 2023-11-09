@@ -17,3 +17,7 @@ use App\Http\Controllers\Api\ProjectController; //importo il controller api  che
 */
 //Questa route mi darra l'indirizzo api con cui faro la richiesta ad axios
 Route:: apiResource("projects", ProjectController::class)->only(["index","show"]);
+
+//rotta che porta a '/project-by-type/{type_id},chi la gestisce ?come la chiamiamo ?
+//questo metodo/rotta va messa nel post controller
+Route::get('/project-by-type/{type_id}',[ProjectController::class, 'projectByType']);
