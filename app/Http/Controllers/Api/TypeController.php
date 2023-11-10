@@ -14,6 +14,18 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function index(){
+        $type = Type::select('id','name','color')->get();
+        return response()->json( $type);
+     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         //manca il nome della type 
