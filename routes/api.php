@@ -16,13 +16,17 @@ use App\Http\Controllers\Api\TypeController; //importo il controller api  che ge
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// # PROJECT API
 //Questa route mi darra l'indirizzo api con cui faro la richiesta ad axios
 Route:: apiResource("projects", ProjectController::class)->only(["index","show"]);
-
 //rotta che porta a '/project-by-type/{type_id},chi la gestisce ?come la chiamiamo ?
 //questo metodo/rotta va messa nel post controller
 Route::get('/project-by-type/{type_id}',[ProjectController::class, 'projectByType']);
+Route::get('get-projects-by-filters',[ProjectController::class, 'projectByFilters']);
 
 
-Route::apiResource('type', TypeController::class)->only(['show']);
+
+// # TYPE API
+Route::apiResource('type', TypeController::class)->only(['index','show']);
 
