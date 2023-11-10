@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Project; //importo il modello 
 use App\Http\Controllers\Api\ProjectController; //importo il controller api  che gestisce questa route
 use App\Http\Controllers\Api\TypeController; //importo il controller api  che gestisce questa route
+use App\Http\Controllers\Api\TechnologyController; //importo il controller api  che gestisce questa route
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,8 @@ Route::get('get-projects-by-filters',[ProjectController::class, 'projectByFilter
 
 // # TYPE API
 Route::apiResource('type', TypeController::class)->only(['index','show']);
+
+
+// # TECHNOLOGY API
+Route::apiResource('technology', TechnologyController::class)->only(['index']);
 
