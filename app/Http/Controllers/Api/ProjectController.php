@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project; //importo il modello 
 use App\Models\Type; //importo il modello di Type
+use App\Models\Technology; //importo il modello di Technology
+
+use Illuminate\Database\Eloquent\Builder;
 class ProjectController extends Controller
 {
     /**
@@ -83,6 +86,12 @@ class ProjectController extends Controller
         $projects_query->whereIn('type_id', $filters['activeTypes']);
     }
 
+    if (!empty($filters['activeTechnologies'])) {
+        $projects_query->whereHas('technologies', function (Builder $query) use ($filters) {
+            $query->whereIn('id', $filters['activeTechnologies']);
+        });
+    }
+    
     $projects_query = $projects_query->paginate(10);
 
     return response()->json($projects_query);
