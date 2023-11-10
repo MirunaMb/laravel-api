@@ -70,4 +70,22 @@ class ProjectController extends Controller
  
     return response()->json($projects);
    }
+
+   public function projectByFilters(Request $request){
+
+    $filters = $request->all();
+    $projects_query = Project::select("id","type_id","title","slug");
+    $projects_query->where('published', 1);
+    $projects_query->with('technologies:id,name_technologies','type:id,name,color') ;
+    $projects_query->orderByDesc('id');
+
+    if (!empty($filters['activeTypes'])){
+        $projects_query->whereIn('type_id', $filters['activeTypes']);
+    }
+
+    $projects_query = $projects_query->paginate(10);
+
+    return response()->json($projects_query);
+}
+
 }
